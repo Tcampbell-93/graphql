@@ -21,7 +21,7 @@ const typeDefs = `
         user: User
     }
 
-    type BookInput {
+    input BookInput {
         authors: [String]
         description: String
         title: String

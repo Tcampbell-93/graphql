@@ -1,4 +1,4 @@
-import { User } from '../models/index';
+const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -36,17 +36,17 @@ const resolvers = {
         },
         saveBook: async (_, { bookInput }, { user }) => {
             try {
-              const updatedUser = await User.findOneAndUpdate(
-                { _id: user._id },
-                { $addToSet: { savedBooks: bookInput } },
-                { new: true, runValidators: true }
-              );
-              return updatedUser;
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: user._id },
+                    { $addToSet: { savedBooks: bookInput } },
+                    { new: true, runValidators: true }
+                );
+                return updatedUser;
             } catch (err) {
-              throw new Error(err.message);
+                throw new Error(err.message);
             }
         },
-        deleteBook: async (_, { bookId }, { user }) => {
+        removeBook: async (_, { bookId }, { user }) => {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: user._id },
                 { $pull: { savedBooks: { _id: bookId } } },
