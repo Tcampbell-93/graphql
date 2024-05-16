@@ -8,6 +8,7 @@ import {
   Row
 } from 'react-bootstrap';
 
+import { searchGoogleBooks } from '../utils/API';
 import Auth from '../utils/auth';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
@@ -75,11 +76,7 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await saveBook({ variables: { input: bookToSave }, context: { headers: { authorization: `Bearer ${token}` } }});
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      saveBook({ variables: { input: bookToSave }});
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
