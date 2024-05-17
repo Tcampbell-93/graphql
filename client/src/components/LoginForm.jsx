@@ -1,4 +1,3 @@
-// see SignupForm.js for comments
 import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
@@ -29,7 +28,9 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await login({variables: userFormData});
+      console.log(userFormData);
+      
+      const response = await login({variables: { ...userFormData }});
 
       const { token, user } = response.data;
       console.log(user);

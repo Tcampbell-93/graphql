@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import {
   Container,
   Card,
@@ -17,7 +16,7 @@ import { REMOVE_BOOK } from '../utils/mutations';
 const SavedBooks = () => {
 
   const { loading, userData } = useQuery(GET_ME, {
-    variables: { _id: _id },
+    variables: { _id: user._id },
   });
 
   const { removeBook } = useMutation(REMOVE_BOOK);
